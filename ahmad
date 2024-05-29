@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Dabakeh - Web Designer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .about-me {
+            background-color: #fff;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .about-me h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .about-me p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #000;
+            color: #fff;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .about-me h2 {
+                font-size: 1.5em;
+            }
+            .about-me p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ahmad Dabakeh</h1>
+        <p>Web Designer</p>
+    </header>
+    <div class="container">
+        <section class="about-me">
+            <h2>About Me</h2>
+            <p>Hello! I'm Ahmad Dabakeh, a passionate web designer with a keen eye for creating sleek and user-friendly websites. With a solid background in design principles and a deep understanding of the latest web technologies, I aim to bring a touch of elegance and functionality to every project I work on. Whether it's crafting a new website from scratch or revamping an existing one, I thrive on turning ideas into visually stunning and effective digital experiences.</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Ahmad Dabakeh. All rights reserved.</p>
+    </footer>
+</body>
+</html>
