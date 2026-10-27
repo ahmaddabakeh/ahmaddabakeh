@@ -114,17 +114,14 @@ def build(font):
     inner = dilate(union, GAP)
     outer = dilate(union, GAP + LINE)
     outer_ring = pathops.op(outer, inner, pathops.PathOp.DIFFERENCE)
-    # Inside the overlap: one thin, clean line between the word and the sparkle.
+    # Where they cross, the word sits on top with only its thin dark gap around it. The sparkle keeps its
+    # own outline (same line as the outer keyline) all the way round, running right up to the Y's gap,
+    # so the two outlines meet and interlock instead of stopping short.
     word_gap = dilate(name, C_GAP)
-    word_line = dilate(name, C_GAP + C_LINE)
-    inner_line = pathops.op(pathops.op(word_line, word_gap, pathops.PathOp.DIFFERENCE),
-                            dilate(sym, C_GAP + C_LINE + 1),
-                            pathops.PathOp.INTERSECTION)  # wherever the sparkle meets the word
-    # Join the lines: fill any sliver between the inner line and the outer ring so they meet as one.
-    ring = closing(pathops.op(outer_ring, inner_line, pathops.PathOp.UNION), 0.55 * U)
+    star_ring = pathops.op(dilate(sym, GAP + LINE), dilate(sym, GAP), pathops.PathOp.DIFFERENCE)
+    ring = closing(pathops.op(outer_ring, star_ring, pathops.PathOp.UNION), 0.55 * U)
     ring = pathops.op(pathops.op(ring, word_gap, pathops.PathOp.DIFFERENCE), outer, pathops.PathOp.INTERSECTION)
-    # The sparkle fills right up to the line (its own points stay sharp).
-    sym_visible = pathops.op(sym, word_line, pathops.PathOp.DIFFERENCE)
+    sym_visible = pathops.op(sym, word_gap, pathops.PathOp.DIFFERENCE)
     return name, sym_visible, ring, outer
 
 

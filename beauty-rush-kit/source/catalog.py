@@ -94,7 +94,9 @@ def rounds(S):
          svgs(os.path.join(sk, "final-v2"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
         ("R26", "Final mark v3 (sparkle's bottom-left corner wraps the Y)",
          svgs(os.path.join(sk, "final-v3"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
-        ("R27", "Final mark v4 (fuller sparkle, clean outline through the overlap) — current",
+        ("R27", "Final mark v4 (fuller sparkle, one clean outline through the overlap)",
+         svgs(os.path.join(sk, "final-v4"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
+        ("R28", "Final mark v5 (sparkle and word outlines interlock) — current",
          svgs(os.path.join(kit, "social"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
     ]
 
