@@ -1,0 +1,34 @@
+{
+  "brand": "Beauty Rush",
+  "tagline": "Live beauty deals",
+  "brief": "A TikTok Live shopping brand for recognisable makeup, skincare and haircare. It should feel like a real beauty brand first: bold, premium and social-native, never cheap or like a discount store.",
+  "adjectives": ["bold", "premium", "feminine", "social-native"],
+  "criteria": "Success: loud on TikTok Live, recognisable as a 48 px profile picture, works in one colour, sits naturally next to Sephora and Ulta brands.",
+  "mockups": ["social", "box", "shopping-bag", "sticker", "tshirt", "signage"],
+  "nav": ["Shop the Live", "Brands", "Schedule"],
+  "brand_color": "#F5B8C9",
+  "tile_color": "#F5B8C9",
+  "greyscale": false,
+  "final": true,
+  "concepts": [
+    {
+      "name": "Beauty Rush Bold",
+      "lockup": "../logo/beauty-rush-horizontal.svg",
+      "stacked": "../logo/beauty-rush-stacked.svg",
+      "avatar": "../logo/beauty-rush-br.svg",
+      "symbol_on_tile": "../logo/beauty-rush-br.svg",
+      "stacked_on_tile": "../logo/beauty-rush-stacked.svg",
+      "lockup_on_tile": "../logo/beauty-rush-horizontal.svg",
+      "symbol_on_dark": "../logo/beauty-rush-br-mono-f5b8c9.svg",
+      "lockup_on_dark": "../logo/beauty-rush-horizontal-mono-f5b8c9.svg",
+      "stacked_on_dark": "../logo/beauty-rush-stacked-mono-f5b8c9.svg",
+      "idea": "Heavy black capitals on candy pink: simple, loud and instantly recognisable on a TikTok Live.",
+      "rationale": [
+        "Type-only wordmark in the spirit of the big beauty houses: confident, no clip-art",
+        "Candy pink and black own the feed and read at a glance on Live graphics",
+        "BR monogram carries the brand where the full name is too small"
+      ]
+    }
+  ],
+  "recommendation": "Use the horizontal logo as the main logo, the stacked logo on packaging and merch, and the BR monogram for the TikTok profile picture and icons."
+}
