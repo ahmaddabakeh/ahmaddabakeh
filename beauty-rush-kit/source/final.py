@@ -59,28 +59,33 @@ def name_path(font, target_w):
 
 
 def sparkle_path(cx, cy, r):
-    """Big sparkle + a small one up and to the right, separated by exactly 2 units of space."""
+    """Big sparkle + a small one on the 45-degree diagonal up-right, in the empty quadrant between two points."""
     p = pathops.Path()
     from fontTools.svgLib.path import parse_path
-    small_r = r * 0.26
-    off = r * 0.62 + small_r + 2 * U
-    parse_path(sparkle(cx, cy, r, 0.1) + " " + sparkle(cx + off * 0.82, cy - off * 0.88, small_r, 0.1), p.getPen())
+    small_r = r * 0.3
+    off = r * 0.78  # along the diagonal: clear of the big sparkle's curves, with room for the keyline
+    tension = 0.17  # fuller, softer points than a needle-thin star
+    parse_path(sparkle(cx, cy, r, tension) + " " + sparkle(cx + off, cy - off, small_r, tension), p.getPen())
     return pathops.op(p, pathops.Path(), pathops.PathOp.UNION)
 
 
 def build(font):
     name, cap_top = name_path(font, 760)
     x0, y0, x1, y1 = name.bounds
-    r = cap_top * 1.15                      # big sparkle radius relative to BEAUTY's cap height
+    r = cap_top * 1.02                      # big sparkle radius ~ BEAUTY's cap height
     # The sparkle's bottom-left corner (the curve between its left and bottom points) wraps the Y's
     # top-right corner: the word sits in front, all four points stay visible around it.
-    sym = sparkle_path(x1 + r * 0.16, y0 - r * 0.20, r)
-    halo = stroke_outline(name, 2 * GAP)    # the letters' black gap, cut out of the symbol behind them
-    sym_visible = pathops.op(sym, halo, pathops.PathOp.DIFFERENCE)
+    sym = sparkle_path(x1 + r * 0.06, y0 - r * 0.30, r)
+    # In the overlap the word keeps its own full keyline: letter, gap, line, gap, then the sparkle.
+    word_inner = stroke_outline(name, 2 * GAP)
+    word_outer = stroke_outline(name, 2 * (GAP + LINE))
+    word_ring = pathops.op(word_outer, word_inner, pathops.PathOp.DIFFERENCE)
+    clear = stroke_outline(name, 2 * (2 * GAP + LINE))  # a second gap so the line never touches the sparkle
+    sym_visible = pathops.op(sym, clear, pathops.PathOp.DIFFERENCE)
     union = pathops.op(name, sym, pathops.PathOp.UNION)
     inner = stroke_outline(union, 2 * GAP)
     outer = stroke_outline(union, 2 * (GAP + LINE))
-    ring = pathops.op(outer, inner, pathops.PathOp.DIFFERENCE)
+    ring = pathops.op(pathops.op(outer, inner, pathops.PathOp.DIFFERENCE), word_ring, pathops.PathOp.UNION)
     return name, sym_visible, ring, outer
 
 
