@@ -3,8 +3,8 @@
 ## What's in the folder
 | Folder | Contents |
 |---|---|
-| `logo/` | Horizontal, stacked and BR monogram. Each comes in black, white, pink (`mono-f5b8c9`), burgundy (`mono-6b1f35`), on-pink and on-black versions, as SVG and high-resolution PNG. |
-| `social/` | **`tiktok-profile-sticker.png`** (chosen profile picture: the name on a tilted black label over candy pink, 1080 × 1080, safe inside the circle crop). Alternates: `tiktok-profile-split.png`, `tiktok-profile.png` (BR) and `tiktok-profile-full-name.png`, the last two with black versions. Plus `live-banner-1920x1080.png`. |
+| `logo/` | **`beauty-rush-sparkle-dark.svg/.png`** and **`beauty-rush-sparkle-bright.svg/.png`**: the final sparkle mark on a transparent background, all solid shapes (no strokes). Plus the horizontal, stacked and BR monogram. Each comes in black, white, pink (`mono-f5b8c9`), burgundy (`mono-6b1f35`), on-pink and on-black versions, as SVG and high-resolution PNG. |
+| `social/` | **`tiktok-profile-sparkle-dark.png`** and **`tiktok-profile-sparkle-bright.png`** (final mark: italic BEAUTY RUSH in front of a hot-pink sparkle, one keyline, 1080 × 1080, sized for the circle crop). Earlier option: `tiktok-profile-sticker.png` ( the name on a tilted black label over candy pink, 1080 × 1080, safe inside the circle crop). Alternates: `tiktok-profile-split.png`, `tiktok-profile.png` (BR) and `tiktok-profile-full-name.png`, the last two with black versions. Plus `live-banner-1920x1080.png`. |
 | `web/` | `favicon.ico`, favicon and app-icon PNGs, `apple-touch-icon.png`, `site.webmanifest`, and `head-snippet.html` to paste into your website's `<head>`. |
 | `presentation/` | `board.html`, the final identity board with mockups (social profile, mailer box, shopping bag, sticker, t-shirt, signage), and `board-full.png`. |
 | `BRAND-GUIDELINES.md` | One-page usage guide: clear space, minimum sizes, colours, fonts and don'ts. |
