@@ -28,6 +28,7 @@ VARIANTS = {
 
 U = 10                 # spacing unit: the black gap between shapes and the keyline
 GAP, LINE = U, U * 0.6  # keyline = gap, then a line 0.6 of the gap
+C_GAP, C_LINE = U * 0.7, U * 0.35  # finer outline where the word crosses the sparkle
 LINE_GAP = 3 * U       # space between BEAUTY and RUSH: room for both gaps, so the keyline wraps as one shape
 
 
@@ -76,12 +77,12 @@ def build(font):
     # The sparkle's bottom-left corner (the curve between its left and bottom points) wraps the Y's
     # top-right corner: the word sits in front, all four points stay visible around it.
     sym = sparkle_path(x1 + r * 0.06, y0 - r * 0.30, r)
-    # In the overlap the word keeps its own full keyline: letter, gap, line, gap, then the sparkle.
+    # In the overlap there is exactly one outline: letter, gap, then the sparkle starts right at the line,
+    # in the same weight as the outer keyline so it reads as one continuous outline.
     word_inner = stroke_outline(name, 2 * GAP)
     word_outer = stroke_outline(name, 2 * (GAP + LINE))
     word_ring = pathops.op(word_outer, word_inner, pathops.PathOp.DIFFERENCE)
-    clear = stroke_outline(name, 2 * (2 * GAP + LINE))  # a second gap so the line never touches the sparkle
-    sym_visible = pathops.op(sym, clear, pathops.PathOp.DIFFERENCE)
+    sym_visible = pathops.op(sym, word_outer, pathops.PathOp.DIFFERENCE)
     union = pathops.op(name, sym, pathops.PathOp.UNION)
     inner = stroke_outline(union, 2 * GAP)
     outer = stroke_outline(union, 2 * (GAP + LINE))
