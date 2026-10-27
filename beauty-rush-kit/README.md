@@ -4,7 +4,7 @@
 | Folder | Contents |
 |---|---|
 | `logo/` | Horizontal, stacked and BR monogram. Each comes in black, white, pink (`mono-f5b8c9`), burgundy (`mono-6b1f35`), on-pink and on-black versions, as SVG and high-resolution PNG. |
-| `social/` | **`tiktok-profile-split.png`** (chosen profile picture: BEAUTY in black on pink, RUSH in pink on a black band, 1080 × 1080, readable from 32 px up). Alternates: `tiktok-profile.png` (BR) and `tiktok-profile-full-name.png`, each with a black version. Plus `live-banner-1920x1080.png`. |
+| `social/` | **`tiktok-profile-sticker.png`** (chosen profile picture: the name on a tilted black label over candy pink, 1080 × 1080, safe inside the circle crop). Alternates: `tiktok-profile-split.png`, `tiktok-profile.png` (BR) and `tiktok-profile-full-name.png`, the last two with black versions. Plus `live-banner-1920x1080.png`. |
 | `web/` | `favicon.ico`, favicon and app-icon PNGs, `apple-touch-icon.png`, `site.webmanifest`, and `head-snippet.html` to paste into your website's `<head>`. |
 | `presentation/` | `board.html`, the final identity board with mockups (social profile, mailer box, shopping bag, sticker, t-shirt, signage), and `board-full.png`. |
 | `BRAND-GUIDELINES.md` | One-page usage guide: clear space, minimum sizes, colours, fonts and don'ts. |
