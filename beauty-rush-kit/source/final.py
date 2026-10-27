@@ -72,9 +72,9 @@ def build(font):
     name, cap_top = name_path(font, 760)
     x0, y0, x1, y1 = name.bounds
     r = cap_top * 1.15                      # big sparkle radius relative to BEAUTY's cap height
-    # The sparkle sits fully above the top-right of the Y: all four points visible, its bottom point
-    # just touching the Y so one keyline still wraps the word and the sparkle together.
-    sym = sparkle_path(x1 - r * 0.30, y0 - r * 0.92, r)
+    # The sparkle's bottom-left corner (the curve between its left and bottom points) wraps the Y's
+    # top-right corner: the word sits in front, all four points stay visible around it.
+    sym = sparkle_path(x1 + r * 0.16, y0 - r * 0.20, r)
     halo = stroke_outline(name, 2 * GAP)    # the letters' black gap, cut out of the symbol behind them
     sym_visible = pathops.op(sym, halo, pathops.PathOp.DIFFERENCE)
     union = pathops.op(name, sym, pathops.PathOp.UNION)

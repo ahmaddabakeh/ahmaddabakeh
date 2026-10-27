@@ -90,7 +90,9 @@ def rounds(S):
         ("R23", "Word in front, hot-pink symbol behind", svgs(sk, [(n, f"pfp11-{k}-behind.svg") for k, n in sym4])),
         ("R24", "Final mark v1 (sparkle partly behind the Y)",
          svgs(os.path.join(sk, "final-v1"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
-        ("R25", "Final mark v2 (all four sparkle points showing) — current",
+        ("R25", "Final mark v2 (all four sparkle points showing)",
+         svgs(os.path.join(sk, "final-v2"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
+        ("R26", "Final mark v3 (sparkle's bottom-left corner wraps the Y) — current",
          svgs(os.path.join(kit, "social"), [("Dark", "tiktok-profile-sparkle-dark.svg"), ("Bright", "tiktok-profile-sparkle-bright.svg")])),
     ]
 
