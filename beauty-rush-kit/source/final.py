@@ -40,6 +40,31 @@ def stroke_outline(p, w):
     return pathops.op(p, s, pathops.PathOp.UNION)
 
 
+def _band(p, w):
+    s = pathops.Path(p)
+    s.stroke(w, pathops.LineCap.ROUND_CAP, pathops.LineJoin.ROUND_JOIN, 4)
+    s.convertConicsToQuads()
+    return pathops.op(s, pathops.Path(), pathops.PathOp.UNION)
+
+
+def dilate(p, d):
+    return pathops.op(p, _band(p, 2 * d), pathops.PathOp.UNION)
+
+
+def erode(p, d):
+    return pathops.op(p, _band(p, 2 * d), pathops.PathOp.DIFFERENCE)
+
+
+def closing(p, c):
+    """Fill notches and slivers narrower than 2c, rounding inside corners."""
+    return erode(dilate(p, c), c)
+
+
+def opening(p, o):
+    """Remove bits thinner than 2o, rounding outside corners."""
+    return dilate(erode(p, o), o)
+
+
 def name_path(font, target_w):
     """BEAUTY over RUSH at one optical width; RUSH shifted left to follow the italic slant."""
     track = 14
@@ -77,16 +102,29 @@ def build(font):
     # The sparkle's bottom-left corner (the curve between its left and bottom points) wraps the Y's
     # top-right corner: the word sits in front, all four points stay visible around it.
     sym = sparkle_path(x1 + r * 0.06, y0 - r * 0.30, r)
-    # In the overlap there is exactly one outline: letter, gap, then the sparkle starts right at the line,
-    # in the same weight as the outer keyline so it reads as one continuous outline.
-    word_inner = stroke_outline(name, 2 * GAP)
-    word_outer = stroke_outline(name, 2 * (GAP + LINE))
-    word_ring = pathops.op(word_outer, word_inner, pathops.PathOp.DIFFERENCE)
-    sym_visible = pathops.op(sym, word_outer, pathops.PathOp.DIFFERENCE)
-    union = pathops.op(name, sym, pathops.PathOp.UNION)
-    inner = stroke_outline(union, 2 * GAP)
-    outer = stroke_outline(union, 2 * (GAP + LINE))
-    ring = pathops.op(pathops.op(outer, inner, pathops.PathOp.DIFFERENCE), word_ring, pathops.PathOp.UNION)
+    # Outer silhouette, with its inside corners (where the sparkle meets the word) rounded off.
+    raw = pathops.op(name, sym, pathops.PathOp.UNION)
+    union = closing(raw, 1.4 * U)
+    # Only around the overlap (the Y's top and the sparkle's corner) bridge the notches fully, so the
+    # outer line runs in one clean sweep there; everywhere else the outline still hugs the letters.
+    overlap = pathops.op(name, dilate(sym, U), pathops.PathOp.INTERSECTION)
+    zone = dilate(overlap, 5 * U)
+    bridged = pathops.op(closing(raw, 3.5 * U), zone, pathops.PathOp.INTERSECTION)
+    union = pathops.op(union, bridged, pathops.PathOp.UNION)
+    inner = dilate(union, GAP)
+    outer = dilate(union, GAP + LINE)
+    outer_ring = pathops.op(outer, inner, pathops.PathOp.DIFFERENCE)
+    # Inside the overlap: one thin, clean line between the word and the sparkle.
+    word_gap = dilate(name, C_GAP)
+    word_line = dilate(name, C_GAP + C_LINE)
+    inner_line = pathops.op(pathops.op(word_line, word_gap, pathops.PathOp.DIFFERENCE),
+                            dilate(sym, C_GAP + C_LINE + 1),
+                            pathops.PathOp.INTERSECTION)  # wherever the sparkle meets the word
+    # Join the lines: fill any sliver between the inner line and the outer ring so they meet as one.
+    ring = closing(pathops.op(outer_ring, inner_line, pathops.PathOp.UNION), 0.55 * U)
+    ring = pathops.op(pathops.op(ring, word_gap, pathops.PathOp.DIFFERENCE), outer, pathops.PathOp.INTERSECTION)
+    # The sparkle fills right up to the line (its own points stay sharp).
+    sym_visible = pathops.op(sym, word_line, pathops.PathOp.DIFFERENCE)
     return name, sym_visible, ring, outer
 
 
