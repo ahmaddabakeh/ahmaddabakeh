@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu | Al-Bahaar – Orland Park, IL</title>
+<meta name="description" content="The full Al-Bahaar menu: Mediterranean appetizers, Persian and Arabian kababs, fried and grilled seafood, chef's specials, drinks and desserts.">
+<link rel="icon" href="https://cdn.prod.website-files.com/660ee881750650ca2d4c4b7c/6636f6d377a732e5ce05738d_favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="menu">
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">What to expect</span>
+      <h1>Our Exquisite Menu</h1>
+      <p class="lead" style="margin-inline:auto">Explore your options — from cold mezze to mesquite-grilled kababs and the ocean's finest.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:28px">
+        <a class="btn btn-gold" href="https://albahaar.smartonlineorder.com/" target="_blank" rel="noopener">Order Online</a>
+        <a class="btn btn-ghost" href="tel:+17086530009">Call to Reserve</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="menu-tabs" aria-label="Menu categories"><div class="container"><ul id="tabs"></ul></div></nav>
+  <div class="container" id="menu"></div>
+  <p class="container" style="color:var(--muted);font-size:.85rem;padding-top:40px">Prices and availability are subject to change. Catering menu available by phone or in person.</p>
+
+  <section class="section" data-reserve></section>
+</main>
+
+<div id="site-footer"></div>
+<script src="menu-data.js"></script>
+<script src="site.js"></script>
+<script>
+  const slug = (s) => s.toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, "");
+  document.getElementById("tabs").innerHTML = MENU.map((c) => `<li><a href="#${slug(c.name)}">${c.name}</a></li>`).join("");
+  document.getElementById("menu").innerHTML = MENU.map((c) => `
+    <section class="menu-cat" id="${slug(c.name)}">
+      <h2>${c.name}</h2>
+      ${c.note ? `<p class="cat-note">${c.note}</p>` : ""}
+      <div class="dishes">${c.items.map(dishHTML).join("")}</div>
+    </section>`).join("");
+
+  // Highlight the active category tab while scrolling
+  const tabs = [...document.querySelectorAll(".menu-tabs a")];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      tabs.forEach((t) => {
+        const on = t.getAttribute("href") === "#" + e.target.id;
+        t.classList.toggle("active", on);
+        if (on) t.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+      });
+    });
+  }, { rootMargin: "-160px 0px -60% 0px" });
+  document.querySelectorAll(".menu-cat").forEach((s) => io.observe(s));
+</script>
+</body>
+</html>
